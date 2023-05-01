@@ -1,11 +1,17 @@
 name: Global CI
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  repository_dispatch:
+    types: [notifiy-discord]
+
 jobs:
-  build:
+  discord-updates:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: https://discord.com/api/webhooks/1102520462011027486/SyXN4msDHQhxhRnJcLeJ4qWVno39TPFGfHi45vOym2XGHDpARW23rQGzjRkjuJu6YDk2
+          nodetail: true
+          title: ${{github.repository}}
+          url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
