@@ -1,0 +1,6 @@
+{
+  "projectName": "Roadmap",
+  "title": "Product roadmap API inspired by Posthog roadmap page",
+  "description": "Create user-facing product roadmap API similar to Posthog's through Github issues and labels",
+  "extensions": ["postgresql", "hono", "github"]
+}
