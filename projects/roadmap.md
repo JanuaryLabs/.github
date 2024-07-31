@@ -1,8 +1,8 @@
 ---
-title: 'Product roadmap API inspired by Posthog roadmap page'
+title: "Product roadmap API inspired by Posthog roadmap page"
 description: "Create user-facing product roadmap API similar to Posthog's through Github issues and labels"
-projectName: 'Roadmap'
-extensions: "postgresql, hono.dev, github"
+projectName: "Roadmap"
+extensions: "postgresql,hono,github"
 ---
 
 ```ts
