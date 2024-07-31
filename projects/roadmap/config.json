@@ -2,5 +2,10 @@
   "projectName": "Roadmap",
   "title": "Product Roadmap API",
   "description": "Create user-facing product roadmap API similar to Posthog's through Github issues and labels",
-  "extensions": ["postgresql", "hono", "github"]
+  "extensions": ["postgresql", "hono", "github"],
+  "sourceCode": "",
+  "author": {
+    "name": "January",
+    "url": "https://github.com/JanuaryLabs"
+  }
 }
