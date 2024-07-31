@@ -63,7 +63,7 @@ The HTTP endpoints are for read only; the write happens through GitHub only.
 
 ### Database Schema
 
-<Mermaid chart={`
+<Mermaid chart={``}>
 erDiagram
     %% Define the AREAS table
     AREAS {
@@ -85,6 +85,4 @@ erDiagram
 
     %% Define the relationship between AREAS and POSTS
     AREAS ||--o{ POSTS : "one area can have many posts, one post can belong to one area (optional)"
-`}>
-
 </Mermaid>
