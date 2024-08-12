@@ -1,0 +1,11 @@
+{
+  "projectName": "Google Tasks",
+  "title": "Google Tasks API",
+  "description": "Create a task manager API similar to Google Tasks",
+  "extensions": ["postgresql", "hono", "github", "node-cron"],
+  "sourceCode": "",
+  "author": {
+    "name": "January",
+    "url": "https://github.com/JanuaryLabs"
+  }
+}
