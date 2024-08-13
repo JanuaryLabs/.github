@@ -1,0 +1,11 @@
+{
+  "projectName": "Digital Menu",
+  "title": "Restaurant Digital Menu",
+  "description": "Restaurant digital menu for users to surface available orders",
+  "extensions": ["postgresql", "hono", "fly"],
+  "sourceCode": "",
+  "author": {
+    "name": "January",
+    "url": "https://github.com/JanuaryLabs"
+  }
+}
