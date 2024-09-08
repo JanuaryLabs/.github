@@ -1,3 +1,4 @@
+
 export default project(
   feature('Tasks', {
     workflows: [
@@ -7,14 +8,15 @@ export default project(
           method: 'post',
           path: '/tasks',
         }),
-        output: output('return { task: steps.task }'),
         actions: {
-          insertTask: action.database.insert({
-            outputName: 'task',
-            table: useTable('tasks'),
-            columns: [useField('name', '@trigger:body.name')],
-          }),
+          insertTask: () =>
+            action.database.insert({
+              outputName: 'task',
+              table: useTable('tasks'),
+              columns: [useField('name', '@trigger:body.name')],
+            }),
         },
+        output: output('return { task: steps.task }'),
       }),
       workflow('UpdateTaskWorkflow', {
         tag: 'tasks',
@@ -24,20 +26,19 @@ export default project(
         }),
         output: output('return { task: steps.task }'),
         actions: {
-          update: action.database.set({
-            outputName: 'task',
-            table: useTable('tasks'),
-            columns: [
-              useField('name', '@trigger:body.name'),
-              useField('description', '@trigger:body.description'),
-              useField('status', '@trigger:body.status'),
-              useField('dueDate', '@trigger:body.dueDate'),
-              useField('favourite', '@trigger:body.favourite'),
-            ],
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          update: () =>
+            action.database.set({
+              outputName: 'task',
+              table: useTable('tasks'),
+              columns: [
+                useField('name', '@trigger:body.name'),
+                useField('description', '@trigger:body.description'),
+                useField('status', '@trigger:body.status'),
+                useField('dueDate', '@trigger:body.dueDate'),
+                useField('favourite', '@trigger:body.favourite'),
+              ],
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('RemoveTaskWorkflow', {
@@ -47,12 +48,11 @@ export default project(
           path: '/tasks/:id',
         }),
         actions: {
-          remove: action.database.remove({
-            table: useTable('tasks'),
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          remove: () =>
+            action.database.remove({
+              table: useTable('tasks'),
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('CompleteTaskWorkflow', {
@@ -62,13 +62,12 @@ export default project(
           path: '/tasks/:id/complete',
         }),
         actions: {
-          complete: action.database.set({
-            table: useTable('tasks'),
-            columns: [useField('status', 'completed')],
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          complete: () =>
+            action.database.set({
+              table: useTable('tasks'),
+              columns: [useField('status', 'completed')],
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('UncompleteTaskWorkflow', {
@@ -78,13 +77,12 @@ export default project(
           path: '/tasks/:id/uncomplete',
         }),
         actions: {
-          uncomplete: action.database.set({
-            table: useTable('tasks'),
-            columns: [useField('status', 'todo')],
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          uncomplete: () =>
+            action.database.set({
+              table: useTable('tasks'),
+              columns: [useField('status', 'todo')],
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('MoveTaskWorkflow', {
@@ -94,13 +92,12 @@ export default project(
           path: '/tasks/:id/move',
         }),
         actions: {
-          move: action.database.set({
-            table: useTable('tasks'),
-            columns: [useField('list', '@trigger:body.listId')],
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          move: () =>
+            action.database.set({
+              table: useTable('tasks'),
+              columns: [useField('list', '@trigger:body.listId')],
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('StarTaskWorkflow', {
@@ -110,13 +107,12 @@ export default project(
           path: '/tasks/:id/star',
         }),
         actions: {
-          star: action.database.set({
-            table: useTable('tasks'),
-            columns: [useField('favourite', true)],
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          star: () =>
+            action.database.set({
+              table: useTable('tasks'),
+              columns: [useField('favourite', true)],
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('CreateListWorkflow', {
@@ -127,14 +123,15 @@ export default project(
         }),
         output: output('return { list: steps.list }'),
         actions: {
-          insertList: action.database.insert({
-            outputName: 'list',
-            table: useTable('lists'),
-            columns: [
-              useField('name', '@trigger:body.name'),
-              useField('innerList', '@trigger:body.innerList'),
-            ],
-          }),
+          insertList: () =>
+            action.database.insert({
+              outputName: 'list',
+              table: useTable('lists'),
+              columns: [
+                useField('name', '@trigger:body.name'),
+                useField('innerList', '@trigger:body.innerList'),
+              ],
+            }),
         },
       }),
       workflow('UpdateListWorkflow', {
@@ -144,13 +141,12 @@ export default project(
           path: '/:id',
         }),
         actions: {
-          update: action.database.set({
-            table: useTable('lists'),
-            columns: [useField('name', '@trigger:body.name')],
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          update: () =>
+            action.database.set({
+              table: useTable('lists'),
+              columns: [useField('name', '@trigger:body.name')],
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('DeleteCompletedTasksWorkflow', {
@@ -160,12 +156,11 @@ export default project(
           path: '/completed',
         }),
         actions: {
-          deleteCompletedTask: action.database.remove({
-            table: useTable('tasks'),
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          deleteCompletedTask: () =>
+            action.database.remove({
+              table: useTable('tasks'),
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('DeleteListWorkflow', {
@@ -175,12 +170,11 @@ export default project(
           path: '/:id',
         }),
         actions: {
-          deleteList: action.database.remove({
-            table: useTable('lists'),
-            query: query(
-              where('id', 'equals', '@trigger:path.id')
-            ),
-          }),
+          deleteList: () =>
+            action.database.remove({
+              table: useTable('lists'),
+              query: query(where('id', 'equals', '@trigger:path.id')),
+            }),
         },
       }),
       workflow('ListListsWorkflow', {
@@ -190,13 +184,14 @@ export default project(
           path: '/',
         }),
         actions: {
-          list: action.database.list({
-            outputName: 'lists',
-            table: useTable('lists'),
-            limit: 50,
-            pagination: 'deferred_joins',
-            query: query(),
-          }),
+          list: () =>
+            action.database.list({
+              outputName: 'lists',
+              table: useTable('lists'),
+              limit: 50,
+              pagination: 'deferred_joins',
+              query: query(),
+            }),
         },
       }),
       workflow('ListTasksWorkflow', {
@@ -206,15 +201,14 @@ export default project(
           path: '/',
         }),
         actions: {
-          list: action.database.list({
-            outputName: 'tasks',
-            table: useTable('tasks'),
-            limit: 50,
-            pagination: 'deferred_joins',
-            query: query(
-              sort('name', 'asc'),
-            ),
-          }),
+          list: () =>
+            action.database.list({
+              outputName: 'tasks',
+              table: useTable('tasks'),
+              limit: 50,
+              pagination: 'deferred_joins',
+              query: query(sort('name', 'asc')),
+            }),
         },
       }),
     ],
