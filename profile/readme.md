@@ -1,11 +1,14 @@
-# January - Backend Development Made Easy
-January is a low-code platform that simplifies backend development, enabling efficient project delivery and reducing feedback loops.
+## January 🛠️✨
 
-## Features
-1. **Fast Delivery**
-2. **Flexible Experimentation**
-3. **Instant Deployment**
-4. **No Vendor Lock-In**
+Creating backend tools because developers deserve simpler, clearer, and more meaningful work. We want to enhance communication, embrace standards, and foster better team collaboration.
 
-## Getting Started
-To get started with January, please create an account on the website: [january.sh](https://january.sh) or try it for free in the [playground](https://app.january.sh/)
+### Products
+
+- **[Serverize](https://serverize.sh/)** – Quickly deploy and preview your Docker apps without unnecessary complexity. Just run `npx serverize`.
+- **[SDK-IT](https://github.com/januarylabs/sdk-it)** – Transform OpenAPI specs into fully customizable, professional-grade SDKs.
+- **[January](https://january.sh/)** – A backend framework that leverages static analysis and code generation designed to work better with LLMs.
+
+### Get in Touch
+
+Got questions or just want to say hi? Reach out at [admin@january.sh](mailto\:admin@january.sh) 📫 📫
+
